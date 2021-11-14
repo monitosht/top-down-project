@@ -36,7 +36,7 @@ public class PlayerGroundedState : PlayerState
         movementDirection = player.InputHandler.RawMovementInput.normalized;
         dashInput = player.InputHandler.DashInput;
 
-        if(dashInput && player.DashState.CheckIfCanDash())
+        if(dashInput && player.DashState.CheckIfCanDash() && movementDirection != Vector2.zero)
         {
             stateMachine.ChangeState(player.DashState);
         }

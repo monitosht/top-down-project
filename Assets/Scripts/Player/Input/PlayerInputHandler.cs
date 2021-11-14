@@ -12,7 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool DashInput {get; private set;}
     public bool DashInputStop {get; private set;}
 
-    [SerializeField]
+    //[SerializeField]
     private float inputHoldTime = 0.2f;
 
     private float dashInputStartTime;
