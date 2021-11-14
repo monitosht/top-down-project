@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public PlayerStateMachine StateMachine {get; private set;}
     public PlayerIdleState IdleState {get; private set;}
     public PlayerMoveState MoveState {get; private set;}
+    public PlayerDashState DashState {get; private set;}
 
     [SerializeField] 
     private PlayerData playerData;   
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData);
         MoveState = new PlayerMoveState(this, StateMachine, playerData);
+        DashState = new PlayerDashState(this, StateMachine, playerData);
     }
 
     private void Start()

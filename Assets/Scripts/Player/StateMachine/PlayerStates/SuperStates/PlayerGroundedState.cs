@@ -6,6 +6,8 @@ public class PlayerGroundedState : PlayerState
 {
     protected Vector2 input;
 
+    private bool dashInput;
+
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
     {
         
@@ -31,6 +33,7 @@ public class PlayerGroundedState : PlayerState
         base.LogicUpdate();
 
         input = player.InputHandler.RawMovementInput;
+        dashInput = player.InputHandler.DashInput;
     }
 
     public override void PhysicsUpdate()

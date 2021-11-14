@@ -7,4 +7,7 @@ public class PlayerData : ScriptableObject
 {
     [Header("Move State")]
     public float movementSpeed = 10;
+
+    [Header("Move State")]
+    public float dashCooldown = 0.5f;
 }
