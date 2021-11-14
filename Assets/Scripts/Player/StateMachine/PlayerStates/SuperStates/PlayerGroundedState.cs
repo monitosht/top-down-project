@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
-    protected Vector2 input;
+    protected Vector2 movementDirection;
 
     private bool dashInput;
 
@@ -33,12 +33,11 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
         
-        input = player.InputHandler.RawMovementInput.normalized;
+        movementDirection = player.InputHandler.RawMovementInput.normalized;
         dashInput = player.InputHandler.DashInput;
 
         if(dashInput && player.DashState.CheckIfCanDash())
         {
-            Debug.Log("again");
             stateMachine.ChangeState(player.DashState);
         }
     }

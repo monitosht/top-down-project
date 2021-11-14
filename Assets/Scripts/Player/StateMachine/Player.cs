@@ -48,24 +48,24 @@ public class Player : MonoBehaviour
 
     private void Update()
     {        
-        CurretVelocity = RB.velocity;
+        //CurretVelocity = RB.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }
 
     private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+        CurretVelocity = RB.velocity;
     }
     #endregion
 
     #region Set Functions
-    public void SetVelocity(Vector2 velocity)
+    public void SetMovementVelocity(Vector2 velocity)
     {
-        workspace.Set(velocity.x, velocity.y);
-        RB.velocity = workspace;
-        CurretVelocity = workspace;
+        RB.velocity = velocity;
+        CurretVelocity = velocity;
     }
-    public void SetVelocity(float velocity, Vector2 direction)
+    public void SetDashVelocity(float velocity, Vector2 direction)
     {
         workspace = direction * velocity;        
         RB.velocity = workspace;

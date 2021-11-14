@@ -28,9 +28,9 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        player.SetVelocity(input * playerData.movementSpeed);
+        player.SetMovementVelocity(movementDirection * playerData.movementSpeed);
 
-        if(input == Vector2.zero)
+        if(movementDirection == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }

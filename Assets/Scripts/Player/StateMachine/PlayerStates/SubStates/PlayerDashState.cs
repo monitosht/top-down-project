@@ -23,7 +23,7 @@ public class PlayerDashState : PlayerAbilityState
 
         isHolding = true;
 
-        dashDirection = player.InputHandler.RawMovementInput;
+        dashDirection = player.InputHandler.RawMovementInput.normalized;
     }
 
     public override void Exit()
@@ -44,12 +44,12 @@ public class PlayerDashState : PlayerAbilityState
                 isHolding = false;
                 startTime = Time.time;
                 player.RB.drag = playerData.drag;
-                player.SetVelocity(playerData.dashVelocity, dashDirection);
+                player.SetDashVelocity(playerData.dashVelocity, dashDirection);
             }
         }
         else
         {            
-            player.SetVelocity(playerData.dashVelocity, dashDirection);
+            player.SetDashVelocity(playerData.dashVelocity, dashDirection);
 
             if(Time.time >= startTime + playerData.dashTime)
             {                
