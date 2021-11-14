@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
     //public Animator Anim {get; private set;}
     public PlayerInputHandler InputHandler {get; private set;}
     public Rigidbody2D RB {get; private set;}
+
     #endregion
 
     #region Movement Variables

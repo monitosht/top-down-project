@@ -35,9 +35,9 @@ public class PlayerInputHandler : MonoBehaviour
         }        
     }
 
-    public void OnAim(InputAction.CallbackContext context)
+    /*public void OnAim(InputAction.CallbackContext context)
     {
-        MousePosition = Camera.main.ScreenToWorldPoint(context.ReadValue<Vector2>());              
-    }
-
+        MousePosition = context.ReadValue<Vector2>();
+        Debug.Log(MousePosition);  
+    }*/
 }
