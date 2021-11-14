@@ -21,6 +21,8 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        player.DashState.ResetCanDash();
     }
 
     public override void Exit()
@@ -31,9 +33,16 @@ public class PlayerGroundedState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
+        Debug.Log("grounded state active");
 
         input = player.InputHandler.RawMovementInput;
         dashInput = player.InputHandler.DashInput;
+
+        if(dashInput && player.DashState.CheckIfCanDash())
+        {
+            stateMachine.ChangeState(player.DashState);
+        }
     }
 
     public override void PhysicsUpdate()

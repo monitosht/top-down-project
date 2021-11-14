@@ -64,6 +64,13 @@ public class Player : MonoBehaviour
         Vector3 movement = velocity * playerData.movementSpeed;
         transform.position += movement * Time.deltaTime;
     }
+
+    public void SetVelocity(float velocity, Vector2 direction)
+    {
+        workspace = direction * velocity;
+        RB.velocity = workspace;
+        CurretVelocity = workspace;
+    }
     #endregion
 
     #region Check Functions

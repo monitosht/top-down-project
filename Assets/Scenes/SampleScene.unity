@@ -775,6 +775,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: d1acf3d0-d64e-4e23-a142-847ba334dbc2
     m_ActionName: Gameplay/Aim[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1722977990}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDashInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 09372ac6-1a75-4dc4-80ca-eda375a31ffd
+    m_ActionName: Gameplay/Dash[/Mouse/rightButton,/XInputControllerWindows/leftTrigger]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard
   m_DefaultActionMap: Gameplay
@@ -792,7 +808,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bf99dd20349a8944a87cac8f7d558f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crosshair: {fileID: 1397965082}
+  inputHoldTime: 0.2
 --- !u!114 &1722977991
 MonoBehaviour:
   m_ObjectHideFlags: 0
