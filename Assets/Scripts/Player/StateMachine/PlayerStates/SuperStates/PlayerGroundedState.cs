@@ -6,6 +6,8 @@ public class PlayerGroundedState : PlayerState
 {
     protected int xInput;
     protected int yInput;
+    protected Vector2 input;
+
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
     {
         
@@ -32,6 +34,7 @@ public class PlayerGroundedState : PlayerState
 
         xInput = player.InputHandler.NormInputX;
         yInput = player.InputHandler.NormInputY;
+        input = player.InputHandler.RawMovementInput;
     }
 
     public override void PhysicsUpdate()

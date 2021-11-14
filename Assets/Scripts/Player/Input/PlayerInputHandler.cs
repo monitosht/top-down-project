@@ -7,6 +7,7 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 RawMovementInput {get; private set;}
     public int NormInputX {get; private set;}
     public int NormInputY {get; private set;}
+    public int NormInput {get; private set;}
 
     public Vector2 MousePosition {get; private set;}
     public GameObject crosshair;
@@ -16,7 +17,7 @@ public class PlayerInputHandler : MonoBehaviour
         RawMovementInput = context.ReadValue<Vector2>();
         
         NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-        NormInputY = (int)(RawMovementInput * Vector2.up).normalized.y;        
+        NormInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)

@@ -57,11 +57,22 @@ public class Player : MonoBehaviour
     #endregion
 
     #region Set Functions
-    public void SetVelocityX(float velocity)
+    public void SetVelocity(float velocityX, float velocityY)
     {
-        workspace.Set(velocity, CurretVelocity.y);
+        workspace.Set(velocityX, velocityY);
         RB.velocity = workspace;
         CurretVelocity = workspace;
+    }
+    public void SetVelocityVector(Vector2 velocity)
+    {
+        RB.velocity = velocity;
+        CurretVelocity = velocity;
+    }
+
+    public void Move(Vector2 velocity)
+    {
+        Vector3 movement = velocity * playerData.movementSpeed;
+        transform.position += movement * Time.deltaTime;
     }
     #endregion
 
