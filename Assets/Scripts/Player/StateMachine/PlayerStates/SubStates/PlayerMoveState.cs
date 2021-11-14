@@ -27,13 +27,10 @@ public class PlayerMoveState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
-        player.CheckFlip(xInput);
-        //player.SetVelocity(playerData.movementSpeed * xInput, playerData.movementSpeed * yInput);
-        //player.SetVelocityVector((playerData.movementSpeed * input));
+        
         player.Move(input);
 
-        if(xInput == 0 && yInput == 0)
+        if(input == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }
