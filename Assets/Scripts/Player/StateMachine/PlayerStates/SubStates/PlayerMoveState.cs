@@ -27,10 +27,10 @@ public class PlayerMoveState : PlayerGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        
+
         player.Move(input);
 
-        if(input == Vector2.zero)
+        if(input.normalized == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }

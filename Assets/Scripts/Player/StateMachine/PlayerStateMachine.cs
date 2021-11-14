@@ -9,7 +9,7 @@ public class PlayerStateMachine
     public void Initilaize(PlayerState startState)
     {
         CurrentState = startState;
-        CurrentState.Enter();
+        CurrentState.Enter();       
     }
 
     public void ChangeState(PlayerState newState)
@@ -17,5 +17,6 @@ public class PlayerStateMachine
         CurrentState.Exit();
         CurrentState = newState;
         CurrentState.Enter();
+        Debug.Log("entered "+newState+" state");
     }
 }
