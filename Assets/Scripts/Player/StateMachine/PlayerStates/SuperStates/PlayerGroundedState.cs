@@ -9,8 +9,7 @@ public class PlayerGroundedState : PlayerState
     private bool dashInput;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
-    {
-        
+    {        
     }
 
     public override void DoChecks()
@@ -34,13 +33,12 @@ public class PlayerGroundedState : PlayerState
     {
         base.LogicUpdate();
         
-        Debug.Log("grounded state active");
-
-        input = player.InputHandler.RawMovementInput;
+        input = player.InputHandler.RawMovementInput.normalized;
         dashInput = player.InputHandler.DashInput;
 
         if(dashInput && player.DashState.CheckIfCanDash())
         {
+            Debug.Log("again");
             stateMachine.ChangeState(player.DashState);
         }
     }

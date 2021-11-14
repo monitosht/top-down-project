@@ -6,15 +6,15 @@ public class PlayerInputHandler : MonoBehaviour
 {   
     private PlayerInput playerInput;
     private Camera cam;
+    public Vector2 MousePosition {get; private set;}
 
     public Vector2 RawMovementInput {get; private set;}
     public bool DashInput {get; private set;}
     public bool DashInputStop {get; private set;}
 
-    public Vector2 MousePosition {get; private set;}
-    
     [SerializeField]
     private float inputHoldTime = 0.2f;
+
     private float dashInputStartTime;
 
     private void Start()
@@ -22,9 +22,10 @@ public class PlayerInputHandler : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         cam = Camera.main;
     }
+
     private void Update()
     {
-        CheckDashTime();
+        CheckDashInputHoldTime();
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -76,11 +77,11 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void UseDashInput() => DashInput = false;
 
-    private void CheckDashTime()
+    private void CheckDashInputHoldTime()
     {
         if(Time.time >= dashInputStartTime + inputHoldTime)
         {
             DashInput = false;
-        }
+        }        
     }
 }

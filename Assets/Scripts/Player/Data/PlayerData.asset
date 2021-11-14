@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   dashCooldown: 0.5
-  dashTime: 0.2
-  dashVelocity: 75
+  dashTime: 0.1
+  dashVelocity: 60
   drag: 10
   afterImageDistance: 0.5

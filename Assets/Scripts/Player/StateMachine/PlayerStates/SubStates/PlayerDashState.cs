@@ -5,10 +5,10 @@ using UnityEngine;
 public class PlayerDashState : PlayerAbilityState
 {
     public bool CanDash {get; private set;}
-
     private float lastDashTime;
     private Vector2 dashDirection;
-    private bool dashInputStop;
+    private bool dashInputStop;    
+    private bool isHolding;
 
     public PlayerDashState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
     {
@@ -20,12 +20,10 @@ public class PlayerDashState : PlayerAbilityState
 
         CanDash = false;
         player.InputHandler.UseDashInput();
-        
-        dashDirection = player.InputHandler.RawMovementInput;
-        dashInputStop = player.InputHandler.DashInputStop;
 
-        player.RB.drag = playerData.drag;
-        player.SetVelocity(playerData.dashVelocity, dashDirection);
+        isHolding = true;
+
+        dashDirection = player.InputHandler.RawMovementInput;
     }
 
     public override void Exit()
@@ -35,7 +33,31 @@ public class PlayerDashState : PlayerAbilityState
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
+        base.LogicUpdate();     
+
+        if(isHolding)
+        {
+            dashInputStop = player.InputHandler.DashInputStop;   
+
+            if(dashInputStop)
+            {
+                isHolding = false;
+                startTime = Time.time;
+                player.RB.drag = playerData.drag;
+                player.SetVelocity(playerData.dashVelocity, dashDirection);
+            }
+        }
+        else
+        {            
+            player.SetVelocity(playerData.dashVelocity, dashDirection);
+
+            if(Time.time >= startTime + playerData.dashTime)
+            {                
+                player.RB.drag = 0f;
+                isAbilityDone = true;
+                lastDashTime = Time.time;
+            }
+        }  
     }
 
     public bool CheckIfCanDash()
@@ -44,6 +66,4 @@ public class PlayerDashState : PlayerAbilityState
     }
 
     public void ResetCanDash() => CanDash = true;
-
-
 }

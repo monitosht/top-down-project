@@ -28,9 +28,9 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        player.Move(input);
+        player.SetVelocity(input * playerData.movementSpeed);
 
-        if(input.normalized == Vector2.zero)
+        if(input == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }
@@ -38,6 +38,6 @@ public class PlayerMoveState : PlayerGroundedState
 
     public override void PhysicsUpdate()
     {
-        base.PhysicsUpdate();
+        base.PhysicsUpdate();        
     }
 }
