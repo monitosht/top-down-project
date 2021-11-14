@@ -33,22 +33,6 @@ public class PlayerInputHandler : MonoBehaviour
         RawMovementInput = context.ReadValue<Vector2>();
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context)
-    {
-        /*if(context.started)
-        {
-            Debug.Log("jump pressed");
-        }
-        if(context.performed)
-        {
-            Debug.Log("jump held");
-        }
-        if(context.canceled)
-        {
-            Debug.Log("jump released");
-        }*/
-    }
-
     /**public void OnAim(InputAction.CallbackContext context)
     {
         MousePosition = context.ReadValue<Vector2>();
