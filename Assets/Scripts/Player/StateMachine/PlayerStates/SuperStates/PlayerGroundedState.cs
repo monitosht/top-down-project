@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerGroundedState : PlayerState
 {
     protected int xInput;
+    protected int yInput;
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
     {
         
@@ -30,6 +31,7 @@ public class PlayerGroundedState : PlayerState
         base.LogicUpdate();
 
         xInput = player.InputHandler.NormInputX;
+        yInput = player.InputHandler.NormInputY;
     }
 
     public override void PhysicsUpdate()
