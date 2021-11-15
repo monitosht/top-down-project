@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a4245ef45119594d95be9c6b0d9e6bc, type: 3}
-  m_Name: PlayerData
+  m_Script: {fileID: 11500000, guid: b1336ed0d03560941b7a9b1bc3f40d98, type: 3}
+  m_Name: Wooden Sword
   m_EditorClassIdentifier: 
-  movementSpeed: 12
-  dashCooldown: 0.5
-  dashTime: 0.1
-  dashVelocity: 60
-  drag: 10
+  itemName: Wooden Sword
+  itemSprite: {fileID: 0}

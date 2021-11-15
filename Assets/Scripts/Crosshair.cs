@@ -49,7 +49,7 @@ public class Crosshair : MonoBehaviour
             {
                 sprite.enabled = true;
             }
-            opacity.a = 0.5f;
+            opacity.a = 0.75f;
             GetComponent<SpriteRenderer>().color = opacity;
             
         }
