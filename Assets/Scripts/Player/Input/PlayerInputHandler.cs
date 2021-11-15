@@ -11,11 +11,11 @@ public class PlayerInputHandler : MonoBehaviour
     public Vector2 RawMovementInput {get; private set;}
     public bool DashInput {get; private set;}
     public bool DashInputStop {get; private set;}
-
     //[SerializeField]
     private float inputHoldTime = 0.2f;
-
     private float dashInputStartTime;
+
+    public bool InteractInput {get; private set;}
 
     private void Start()
     {
@@ -67,5 +67,17 @@ public class PlayerInputHandler : MonoBehaviour
         {
             DashInput = false;
         }        
+    }
+
+    public void OnInteractInput(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            InteractInput = true;
+        }
+        else if(context.canceled)
+        {
+            InteractInput = false;
+        }
     }
 }
