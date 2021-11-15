@@ -16,6 +16,7 @@ public class PlayerInputHandler : MonoBehaviour
     private float dashInputStartTime;
 
     public bool InteractInput {get; private set;}
+    public bool inventoryInput;
 
     private void Start()
     {
@@ -78,6 +79,14 @@ public class PlayerInputHandler : MonoBehaviour
         else if(context.canceled)
         {
             InteractInput = false;
+        }
+    }
+
+    public void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            inventoryInput = true;
         }
     }
 }

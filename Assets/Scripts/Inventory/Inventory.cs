@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
     public int inventorySize;
     public List<Item> items = new List<Item>();
 
-    public bool Add(Item item)
+    public bool Add(Item item) //add item amount argument if needed
     {
         if(items.Count >= inventorySize)
         {
@@ -33,8 +33,32 @@ public class Inventory : MonoBehaviour
 
             return false;            
         }      
+
+        Item tempItem = item;
+        bool stacked = false;
+
+        for(int i = 0; i < items.Count; i++)
+        {
+            if(items[i].itemName == item.itemName)
+            {
+                items[i].itemAmount++;
+                Debug.Log("Stacked "+items[i].itemName+", new amount: "+items[i].itemAmount);
+                stacked = true;
+            }
+        }
+
+        if(stacked == false)
+        {
+            items.Add(tempItem);
+            Debug.Log("Added "+tempItem);  
+        }        
         
-        items.Add(item);
+        /*if(items.Contains(item))
+        {
+            
+        }
+
+        items.Add(item);*/
 
         if(onItemChangedCallback != null)
         {

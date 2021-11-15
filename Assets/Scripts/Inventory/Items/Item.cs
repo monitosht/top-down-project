@@ -4,5 +4,12 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public string itemName = "New Item";
-    public Sprite itemSprite = null;    
+    public Sprite itemSprite = null;  
+
+    public int itemAmount = 1;  
+
+    public virtual void Use()
+    {
+        Debug.Log("Use: "+itemName);
+    }
 }
