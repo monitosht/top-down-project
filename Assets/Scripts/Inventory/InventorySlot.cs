@@ -1,11 +1,11 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour
+public class InventorySlot : MonoBehaviour //, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     private Item item;
     public Image icon;
-
 
     public void AddItem(Item newItem)
     {
@@ -28,5 +28,30 @@ public class InventorySlot : MonoBehaviour
             item.Use();
         }
     }
+
+    #region Drag Methods  
+    /*
+    [SerializeField] private Canvas canvas;
+    private RectTransform originalPosition;   
+
+    private void Awake()
+    {
+        originalPosition = icon.GetComponent<RectTransform>(); 
+    }
+    
+    public void OnDrag(PointerEventData eventData)
+    {        
+        icon.rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
+    }
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        originalPosition.anchoredPosition = icon.rectTransform.anchoredPosition;
+    }
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        icon.rectTransform.anchoredPosition = originalPosition.anchoredPosition;
+    }
+    */
+    #endregion
 }
 

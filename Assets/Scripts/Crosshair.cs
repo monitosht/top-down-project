@@ -9,7 +9,6 @@ public class Crosshair : MonoBehaviour
     private Color opacity;
     private GameObject player;
     private PlayerInput playerInput;
-    private PlayerInputHandler playerInputHandler;
     private Vector2 crosshairPosition;
     private Vector2 mousePosition;
     public float scaleValue;
@@ -19,7 +18,6 @@ public class Crosshair : MonoBehaviour
         opacity = sprite.color;
         player = GameObject.FindGameObjectWithTag("Player");
         playerInput = FindObjectOfType<PlayerInput>();
-        playerInputHandler = FindObjectOfType<PlayerInputHandler>();
     }    
     private void Update()
     {   
