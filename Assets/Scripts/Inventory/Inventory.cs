@@ -39,7 +39,7 @@ public class Inventory : MonoBehaviour
 
         for(int i = 0; i < items.Count; i++)
         {
-            if(items[i].itemName == item.itemName)
+            if(items[i].itemName == item.itemName && items[i].unique == false)
             {
                 items[i].itemAmount++;
                 Debug.Log("Stacked "+items[i].itemName+", new amount: "+items[i].itemAmount);
