@@ -28,10 +28,9 @@ public class PlayerMoveState : PlayerGroundedState
     {
         base.LogicUpdate();
 
-        player.CheckFlip(xInput);
-        player.SetVelocityX(playerData.movementSpeed * xInput);
+        player.SetMovementVelocity(movementDirection * playerData.movementSpeed);
 
-        if(xInput == 0)
+        if(movementDirection == Vector2.zero)
         {
             stateMachine.ChangeState(player.IdleState);
         }
@@ -39,6 +38,6 @@ public class PlayerMoveState : PlayerGroundedState
 
     public override void PhysicsUpdate()
     {
-        base.PhysicsUpdate();
+        base.PhysicsUpdate();        
     }
 }

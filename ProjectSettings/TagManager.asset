@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GameManager
+  - PlayerUI
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - Player
   - 
   - 
-  - 
+  - PlayerUI
   - Cursor
   - 
   - 
@@ -46,6 +48,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2340157729
+    locked: 0
+  - name: PlayerUI
+    uniqueID: 264646629
     locked: 0
   - name: Cursor
     uniqueID: 2210469135

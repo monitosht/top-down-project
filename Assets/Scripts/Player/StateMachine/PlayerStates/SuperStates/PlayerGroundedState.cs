@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerGroundedState : PlayerState
 {
-    protected int xInput;
-    protected int yInput;
+    protected Vector2 movementDirection;
+
+    private bool dashInput;
+
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData) : base(player, stateMachine, playerData)
-    {
-        
+    {        
     }
 
     public override void DoChecks()
@@ -19,6 +20,8 @@ public class PlayerGroundedState : PlayerState
     public override void Enter()
     {
         base.Enter();
+
+        player.DashState.ResetCanDash();
     }
 
     public override void Exit()
@@ -29,9 +32,14 @@ public class PlayerGroundedState : PlayerState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        
+        movementDirection = player.InputHandler.RawMovementInput.normalized;
+        dashInput = player.InputHandler.DashInput;
 
-        xInput = player.InputHandler.NormInputX;
-        yInput = player.InputHandler.NormInputY;
+        if(dashInput && player.DashState.CheckIfCanDash() && movementDirection != Vector2.zero)
+        {
+            stateMachine.ChangeState(player.DashState);
+        }
     }
 
     public override void PhysicsUpdate()

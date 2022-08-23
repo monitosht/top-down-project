@@ -5,64 +5,61 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    private Transform player;
-    private PlayerInput playerInput;
+    float zStart;
+    public float cameraDist, smoothTime;
 
-    Vector3 target;
-    Vector3 mousePosition;
-    Vector3 refVel;
-    Vector3 shakeOffset;
+    Transform player;
+    Vector3 target, mousePos, refVel, shakeOffset;
 
-    float zPosition;
-
-    public float viewDistance;
-    public float smoothTime;
-
-    private void Start()
+    void Start()
     {
-        zPosition = transform.position.z;
-        FindPlayer();
-        playerInput = player.gameObject.GetComponent<PlayerInput>();
+        zStart = transform.position.z; //capture starting z position
     }
 
-    private void Update()
+    void Update()
     {
         FindPlayer();
-        mousePosition = CaptureMousePosition();
-        target = UpdateTargetPosition();
+        target = player.position;
+
+        mousePos = CaptureMousePos();
+        target = UpdateTargetPos();
         UpdateCameraPosition();
     }
 
-    private void FindPlayer()
+    Vector3 CaptureMousePos()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-    }
+        Vector2 ret = Camera.main.ScreenToViewportPoint(Mouse.current.position.ReadValue());
+        //Vector2 ret = Camera.main.ScreenToViewportPoint(Input.mousePosition); DEBUG: OLD INPUT SYSTEM / INCORRECT
 
-    private Vector3 CaptureMousePosition()
-    {
-        Vector2 pos = Camera.main.ScreenToViewportPoint(playerInput.actions["Aim"].ReadValue<Vector2>());
-        pos *= 2;
-        pos -= Vector2.one;
+        ret *= 2;
+        ret -= Vector2.one;
         float max = 0.9f;
-        if (Mathf.Abs(pos.x) > max || Mathf.Abs(pos.y) > max)
+
+        if (Mathf.Abs(ret.x) > max || Mathf.Abs(ret.y) > max)
         {
-            pos = pos.normalized;
+            ret = ret.normalized;
         }
-        return pos;
+        return ret;
     }
 
-    private Vector3 UpdateTargetPosition()
+    Vector3 UpdateTargetPos()
     {
-        Vector3 mouseOffset = mousePosition * viewDistance;
-        Vector3 pos = player.position + mouseOffset;
-        pos.z = zPosition;
-        return pos;
+        Vector3 mouseOffset = mousePos * cameraDist; //mult mouse vector by distance scalar 
+        Vector3 ret = player.position + mouseOffset; //find position as it relates to the player
+        ret += shakeOffset; //add the screen shake vector to the target
+        ret.z = zStart; //make sure camera stays at same Z coord
+        return ret;
     }
 
-    private void UpdateCameraPosition()
+    void UpdateCameraPosition()
     {
         Vector3 tempPos;
-        tempPos = Vector3.SmoothDamp(transform.position, target, ref refVel, smoothTime);
-        transform.position = tempPos;
+        tempPos = Vector3.SmoothDamp(transform.position, target, ref refVel, smoothTime); //smoothly move towards the target
+        transform.position = tempPos; //update the position
+    }
+
+    void FindPlayer()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
 }

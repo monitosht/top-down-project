@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     public PlayerStateMachine StateMachine {get; private set;}
     public PlayerIdleState IdleState {get; private set;}
     public PlayerMoveState MoveState {get; private set;}
+    public PlayerDashState DashState {get; private set;}
 
     [SerializeField] 
     private PlayerData playerData;   
@@ -33,6 +34,7 @@ public class Player : MonoBehaviour
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData);
         MoveState = new PlayerMoveState(this, StateMachine, playerData);
+        DashState = new PlayerDashState(this, StateMachine, playerData);
     }
 
     private void Start()
@@ -45,21 +47,27 @@ public class Player : MonoBehaviour
     }
 
     private void Update()
-    {
-        CurretVelocity = RB.velocity;
+    {        
+        //CurretVelocity = RB.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }
 
-       private void FixedUpdate()
+    private void FixedUpdate()
     {
         StateMachine.CurrentState.PhysicsUpdate();
+        CurretVelocity = RB.velocity;
     }
     #endregion
 
     #region Set Functions
-    public void SetVelocityX(float velocity)
+    public void SetMovementVelocity(Vector2 velocity)
     {
-        workspace.Set(velocity, CurretVelocity.y);
+        RB.velocity = velocity;
+        CurretVelocity = velocity;
+    }
+    public void SetDashVelocity(float velocity, Vector2 direction)
+    {
+        workspace = direction * velocity;        
         RB.velocity = workspace;
         CurretVelocity = workspace;
     }

@@ -1,43 +1,91 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class PlayerInputHandler : MonoBehaviour
 {   
-    public Vector2 RawMovementInput {get; private set;}
-    public int NormInputX {get; private set;}
-    public int NormInputY {get; private set;}
-
+    private PlayerInput playerInput;
+    private Camera cam;
     public Vector2 MousePosition {get; private set;}
-    public GameObject crosshair;
+
+    public Vector2 RawMovementInput {get; private set;}
+    public bool DashInput {get; private set;}
+    public bool DashInputStop {get; private set;}
+    //[SerializeField]
+    private float inputHoldTime = 0.2f;
+    private float dashInputStartTime;
+
+    public bool InteractInput {get; private set;}
+    public bool inventoryInput;
+
+    private void Start()
+    {
+        playerInput = GetComponent<PlayerInput>();
+        cam = Camera.main;
+    }
+
+    private void Update()
+    {
+        CheckDashInputHoldTime();
+    }
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
-        
-        NormInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
-        NormInputY = (int)(RawMovementInput * Vector2.up).normalized.y;        
     }
 
-    public void OnJumpInput(InputAction.CallbackContext context)
+    /**public void OnAim(InputAction.CallbackContext context)
+    {
+        MousePosition = context.ReadValue<Vector2>();
+
+        /*if(playerInput.currentControlScheme == "Keyboard")
+        {
+            MousePosition = cam.ScreenToWorldPoint(MousePosition);
+        }
+
+        Debug.Log(MousePosition);
+    }*/
+
+    public void OnDashInput(InputAction.CallbackContext context)
     {
         if(context.started)
         {
-            Debug.Log("jump pressed");
+            DashInput = true;
+            DashInputStop = false;
+            dashInputStartTime = Time.time;
         }
-        if(context.performed)
+        else if(context.canceled)
         {
-            Debug.Log("jump held");
+            DashInputStop = true;
         }
-        if(context.canceled)
+    }
+
+    public void UseDashInput() => DashInput = false;
+
+    private void CheckDashInputHoldTime()
+    {
+        if(Time.time >= dashInputStartTime + inputHoldTime)
         {
-            Debug.Log("jump released");
+            DashInput = false;
         }        
     }
 
-    /*public void OnAim(InputAction.CallbackContext context)
+    public void OnInteractInput(InputAction.CallbackContext context)
     {
-        MousePosition = context.ReadValue<Vector2>();
-        Debug.Log(MousePosition);  
-    }*/
+        if(context.started)
+        {
+            InteractInput = true;
+        }
+        else if(context.canceled)
+        {
+            InteractInput = false;
+        }
+    }
+
+    public void OnInventoryInput(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            inventoryInput = true;
+        }
+    }
 }
