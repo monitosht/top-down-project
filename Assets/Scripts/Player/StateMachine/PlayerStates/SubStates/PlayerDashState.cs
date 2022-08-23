@@ -14,6 +14,7 @@ public class PlayerDashState : PlayerAbilityState
     {
     }
 
+    //fix holding down dash button
     public override void Enter()
     {
         base.Enter();
@@ -21,7 +22,7 @@ public class PlayerDashState : PlayerAbilityState
         CanDash = false;
         player.InputHandler.UseDashInput();
 
-        isHolding = true;
+        //isHolding = true;
 
         dashDirection = player.InputHandler.RawMovementInput.normalized;
     }

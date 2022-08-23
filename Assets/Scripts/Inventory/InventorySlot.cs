@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour //, IDragHandler, IBeginDragHandler, IEndDragHandler
-{
-    private Item item;
+public class InventorySlot : MonoBehaviour
+{   
+    //[HideInInspector] 
+    public Item item;
     public Image icon;
+    public GameObject buttonParent;
 
     public void AddItem(Item newItem)
     {
@@ -18,7 +19,7 @@ public class InventorySlot : MonoBehaviour //, IDragHandler, IBeginDragHandler, 
     {
         item = null;
         icon.sprite = null;
-        icon.enabled = false;
+        icon.enabled = false; 
     }
 
     public void UseItem()
@@ -29,29 +30,28 @@ public class InventorySlot : MonoBehaviour //, IDragHandler, IBeginDragHandler, 
         }
     }
 
-    #region Drag Methods  
-    /*
-    [SerializeField] private Canvas canvas;
-    private RectTransform originalPosition;   
+    public void UpdateSlot(Item newItem, GameObject newIcon, InventorySlot oldInventorySlot)
+    {
+        if(item == null)
+        {
 
-    private void Awake()
-    {
-        originalPosition = icon.GetComponent<RectTransform>(); 
+            icon.transform.SetParent(oldInventorySlot.buttonParent.transform);            
+            icon.GetComponent<RectTransform>().anchoredPosition = oldInventorySlot.GetComponent<RectTransform>().position;
+            icon.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;       
+
+            newIcon.transform.SetParent(buttonParent.transform);
+            newIcon.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().position;
+            newIcon.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+                        
+            AddItem(newItem);
+            oldInventorySlot.ClearSlot();
+
+            /*var tempIcon = icon;
+            icon = oldInventorySlot.icon;
+            oldInventorySlot.icon = tempIcon;*/
+        }
+
+        Debug.Log("New item dropped into slot");    
     }
-    
-    public void OnDrag(PointerEventData eventData)
-    {        
-        icon.rectTransform.anchoredPosition += eventData.delta / canvas.scaleFactor;
-    }
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        originalPosition.anchoredPosition = icon.rectTransform.anchoredPosition;
-    }
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        icon.rectTransform.anchoredPosition = originalPosition.anchoredPosition;
-    }
-    */
-    #endregion
 }
 

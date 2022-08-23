@@ -26,13 +26,13 @@ public class Inventory : MonoBehaviour
     public List<Item> items = new List<Item>();
 
     public bool Add(Item item) //add item amount argument if needed
-    {
-        if(items.Count >= inventorySize)
+    {   
+         if(items.Count >= inventorySize)
         {
             Debug.Log("Not enough space in inventory to pick up item.");
 
-            return false;            
-        }      
+            return true;            
+        } 
 
         Item tempItem = item;
         bool stacked = false;
@@ -51,14 +51,8 @@ public class Inventory : MonoBehaviour
         {
             items.Add(tempItem);
             Debug.Log("Added "+tempItem);  
-        }        
-        
-        /*if(items.Contains(item))
-        {
-            
-        }
 
-        items.Add(item);*/
+        }        
 
         if(onItemChangedCallback != null)
         {
@@ -76,5 +70,16 @@ public class Inventory : MonoBehaviour
         {
             onItemChangedCallback.Invoke();
         }
+    }
+
+    public bool isFull()
+    {        
+        if(items.Count >= inventorySize)
+        {
+            Debug.Log("Not enough space in inventory to pick up item.");
+
+            return true;            
+        }     
+        return false;
     }
 }

@@ -5,7 +5,6 @@ public class Item : ScriptableObject
 {
     public string itemName = "New Item";
     public Sprite itemSprite = null;  
-
     public int itemAmount = 1;  
     public bool unique = false;
 

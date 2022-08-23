@@ -10,7 +10,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact()
     {
-        //Debug.Log("Interacting with "+transform.name);
+        Debug.Log("Interacting with "+transform.name);
     }
 
     private void Start()
@@ -42,7 +42,6 @@ public class Interactable : MonoBehaviour
         if(collision.tag == "Player")
         {
             inRange = true;
-            //ebug.Log("in range true");
         }
     }
 
@@ -51,7 +50,6 @@ public class Interactable : MonoBehaviour
         if(collision.tag == "Player")
         {
             inRange = false;
-            //Debug.Log("in range false");
         }
     }
     #endregion
